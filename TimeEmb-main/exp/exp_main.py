@@ -215,9 +215,6 @@ class Exp_Main(Exp_Basic):
                     outputs = outputs[:, -self.args.pred_len:, f_dim:]
                     batch_y = batch_y[:, -self.args.pred_len:, f_dim:].to(self.device)
 
-
-
-
                     loss = 0
                     if self.args.rec_lambda:
                         loss_rec = criterion(outputs, batch_y)
@@ -276,10 +273,8 @@ class Exp_Main(Exp_Basic):
                             loss_auxi *= self.mask
 
                         if self.args.auxi_loss == "MAE":
-                            # MAE, 最小化element-wise error的模长
                             loss_auxi = loss_auxi.abs().mean() if self.args.module_first else loss_auxi.mean().abs()  # check the dim of fft
                         elif self.args.auxi_loss == "MSE":
-                            # MSE, 最小化element-wise error的模长
                             loss_auxi = (loss_auxi.abs()**2).mean() if self.args.module_first else (loss_auxi**2).mean().abs()
                         else:
                             raise NotImplementedError

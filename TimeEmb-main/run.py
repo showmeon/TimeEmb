@@ -9,7 +9,7 @@ import multiprocessing
 parser = argparse.ArgumentParser(description='Model family for Time Series Forecasting')
 
 # random seed
-parser.add_argument('--random_seed', type=int, default=2025, help='random seed')
+parser.add_argument('--random_seed', type=int, default=2024, help='random seed')
 
 # basic config
 parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
@@ -39,7 +39,7 @@ parser.add_argument('--use_hour_index', type=int, default=1, help='1: use hour_i
 parser.add_argument('--use_day_index', type=int, default=0, help='1: use day_index or 0: no use')
 parser.add_argument('--hour_length', type=int, default=24, help='embedding length of hour index')
 parser.add_argument('--day_length', type=int, default=7, help='embedding length of day index')
-# FreDF
+# Optimization Objective
 parser.add_argument('--rec_lambda', type=float, default=0., help='weight of reconstruction function')
 parser.add_argument('--auxi_lambda', type=float, default=1, help='weight of auxilary function')
 parser.add_argument('--auxi_loss', type=str, default='MAE', help='loss function')
@@ -71,15 +71,6 @@ parser.add_argument('--subtract_last', type=int, default=0, help='0: subtract me
 parser.add_argument('--decomposition', type=int, default=0, help='decomposition; True 1 False 0')
 parser.add_argument('--kernel_size', type=int, default=25, help='decomposition-kernel')
 parser.add_argument('--individual', type=int, default=0, help='individual head; True 1 False 0')
-
-# SegRNN
-parser.add_argument('--rnn_type', default='gru', help='rnn_type')
-parser.add_argument('--dec_way', default='pmf', help='decode way')
-parser.add_argument('--seg_len', type=int, default=48, help='segment length')
-parser.add_argument('--channel_id', type=int, default=1, help='Whether to enable channel position encoding')
-
-# SparseTSF
-parser.add_argument('--period_len', type=int, default=24, help='period_len')
 
 # Formers
 parser.add_argument('--embed_type', type=int, default=0, help='0: default 1: value embedding + temporal embedding + positional embedding 2: value embedding + temporal embedding 3: value embedding + positional embedding 4: value embedding')
