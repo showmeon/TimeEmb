@@ -23,6 +23,8 @@ do
       --hour_length 24 \
       --train_epochs 30 \
       --patience 5 \
+      --rec_lambda 0.25\
+      --auxi_lambda 0.75\
       --itr 1 --batch_size 256 --learning_rate 0.002 --random_seed $random_seed
 done
 
