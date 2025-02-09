@@ -1,7 +1,6 @@
 from data_provider.data_factory import data_provider
 from exp.exp_basic import Exp_Basic
-from models import Informer, Autoformer, Transformer, DLinear, Linear, NLinear, PatchTST, SegRNN, TimeEmb, \
-    LDLinear, SparseTSF, RLinear, RMLP
+from models import Autoformer, DLinear, PatchTST, TimeEmb
 from utils.polynomial import (chebyshev_torch, hermite_torch, laguerre_torch,
                               leg_torch)
 from utils.tools import EarlyStopping, adjust_learning_rate, visual, test_params_flop
@@ -44,18 +43,9 @@ class Exp_Main(Exp_Basic):
     def _build_model(self):
         model_dict = {
             'Autoformer': Autoformer,
-            'Transformer': Transformer,
-            'Informer': Informer,
             'DLinear': DLinear,
-            'NLinear': NLinear,
-            'Linear': Linear,
             'PatchTST': PatchTST,
-            'SegRNN': SegRNN,
             'TimeEmb': TimeEmb,
-            'LDLinear': LDLinear,
-            'SparseTSF': SparseTSF,
-            'RLinear': RLinear,
-            'RMLP': RMLP
         }
         model = model_dict[self.args.model].Model(self.args).float()
 
@@ -99,7 +89,7 @@ class Exp_Main(Exp_Basic):
                         if any(substr in self.args.model for substr in {'TimeEmb'}):
                             outputs = self.model(batch_x, hour_index, day_index)
                         elif any(substr in self.args.model for substr in
-                                 {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                                 {'Linear', 'MLP', 'TST'}):
                             outputs = self.model(batch_x)
                         else:
                             if self.args.output_attention:
@@ -109,7 +99,7 @@ class Exp_Main(Exp_Basic):
                 else:
                     if any(substr in self.args.model for substr in {'TimeEmb'}):
                         outputs = self.model(batch_x, hour_index, day_index)
-                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'TST'}):
                         outputs = self.model(batch_x)
                     else:
                         if self.args.output_attention:
@@ -186,7 +176,7 @@ class Exp_Main(Exp_Basic):
                         if any(substr in self.args.model for substr in {'TimeEmb'}):
                             outputs = self.model(batch_x, hour_index, day_index)
                         elif any(substr in self.args.model for substr in
-                                 {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                                 {'Linear', 'MLP', 'TST'}):
                             outputs = self.model(batch_x)
                         else:
                             if self.args.output_attention:
@@ -202,7 +192,7 @@ class Exp_Main(Exp_Basic):
                 else:
                     if any(substr in self.args.model for substr in {'TimeEmb'}):
                         outputs = self.model(batch_x, hour_index, day_index)
-                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'TST'}):
                         outputs = self.model(batch_x)
                     else:
                         if self.args.output_attention:
@@ -373,7 +363,7 @@ class Exp_Main(Exp_Basic):
                         if any(substr in self.args.model for substr in {'TimeEmb'}):
                             outputs = self.model(batch_x, hour_index, day_index)
                         elif any(substr in self.args.model for substr in
-                                 {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                                 {'Linear', 'MLP', 'TST'}):
                             outputs = self.model(batch_x)
                         else:
                             if self.args.output_attention:
@@ -383,7 +373,7 @@ class Exp_Main(Exp_Basic):
                 else:
                     if any(substr in self.args.model for substr in {'TimeEmb'}):
                         outputs = self.model(batch_x, hour_index, day_index)
-                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'TST'}):
                         outputs = self.model(batch_x)
                     else:
                         if self.args.output_attention:
@@ -476,7 +466,7 @@ class Exp_Main(Exp_Basic):
                         if any(substr in self.args.model for substr in {'TimeEmb'}):
                             outputs = self.model(batch_x, hour_index, day_index)
                         elif any(substr in self.args.model for substr in
-                                 {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                                 {'Linear', 'MLP', 'TST'}):
                             outputs = self.model(batch_x)
                         else:
                             if self.args.output_attention:
@@ -486,7 +476,7 @@ class Exp_Main(Exp_Basic):
                 else:
                     if any(substr in self.args.model for substr in {'TimeEmb'}):
                         outputs = self.model(batch_x, hour_index, day_index)
-                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'SegRNN', 'TST', 'SparseTSF'}):
+                    elif any(substr in self.args.model for substr in {'Linear', 'MLP', 'TST'}):
                         outputs = self.model(batch_x)
                     else:
                         if self.args.output_attention:
