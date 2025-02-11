@@ -6,7 +6,7 @@ model_id_name=ETTh2
 data_name=ETTh2
 random_seed=2024
 seq_len=96
-for pred_len in 96 192
+for pred_len in 96
 do
     python -u run.py \
       --is_training 1 \
@@ -26,8 +26,7 @@ do
       --itr 1 --batch_size 256 --learning_rate 0.005 --random_seed $random_seed
 done
 
-
-for pred_len in 336 720
+for pred_len in 192 336 720
 do
     python -u run.py \
       --is_training 1 \
