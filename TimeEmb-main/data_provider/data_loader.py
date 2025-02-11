@@ -576,7 +576,6 @@ class Dataset_Solar(Dataset):
         else:
             data = df_data
 
-        self.hour_index = (np.arange(len(data)) % 24)[border1:border2]
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
 
@@ -591,8 +590,7 @@ class Dataset_Solar(Dataset):
         seq_y = self.data_y[r_begin:r_end]
         seq_x_mark = torch.zeros((seq_x.shape[0], 1))
         seq_y_mark = torch.zeros((seq_x.shape[0], 1))
-        hour_index = torch.tensor(self.hour_index[s_end])
-        return seq_x, seq_y, seq_x_mark, seq_y_mark, hour_index
+        return seq_x, seq_y, seq_x_mark, seq_y_mark
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1
@@ -644,7 +642,6 @@ class Dataset_PEMS(Dataset):
             self.scaler.fit(train_data)
             data = self.scaler.transform(data)
 
-        self.hour_index = (np.arange(len(data)) % 24)[border1:border2]
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
 
@@ -658,8 +655,7 @@ class Dataset_PEMS(Dataset):
         seq_y = self.data_y[r_begin:r_end]
         seq_x_mark = torch.zeros((seq_x.shape[0], 1))
         seq_y_mark = torch.zeros((seq_x.shape[0], 1))
-        hour_index = torch.tensor(self.hour_index[s_end])
-        return seq_x, seq_y, seq_x_mark, seq_y_mark, hour_index
+        return seq_x, seq_y, seq_x_mark, seq_y_mark
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1

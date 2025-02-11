@@ -15,7 +15,7 @@ parser.add_argument('--random_seed', type=int, default=2024, help='random seed')
 parser.add_argument('--is_training', type=int, required=True, default=1, help='status')
 parser.add_argument('--model_id', type=str, required=True, default='test', help='model id')
 parser.add_argument('--model', type=str, required=True, default='Autoformer',
-                    help='model name, options: [Autoformer, Informer, Transformer]')
+                    help='model name, options: [Autoformer, DLinear, PatchTST]')
 
 # data loader
 parser.add_argument('--data', type=str, required=True, default='ETTh1', help='dataset type')
@@ -140,22 +140,18 @@ if __name__ == '__main__':
         for ii in range(args.itr):
 
             # setting record of experiments
-            setting = '{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_ax{}_rl{}_axl{}_mf{}_{}_{}'.format(
+            setting = '{}_{}_{}_ft{}_sl{}_pl{}_hi{}_di{}_hl{}_dl{}_dm{}_ax{}_rl{}_axl{}_mf{}_{}_{}'.format(
                 args.model_id,
                 args.model,
                 args.data,
                 args.features,
                 args.seq_len,
-                args.label_len,
                 args.pred_len,
+                args.use_hour_index,
+                args.use_day_index,
+                args.hour_length,
+                args.day_length,
                 args.d_model,
-                args.n_heads,
-                args.e_layers,
-                args.d_layers,
-                args.d_ff,
-                args.factor,
-                args.embed,
-                args.distil,
                 args.auxi_lambda,
                 args.rec_lambda,
                 args.auxi_loss,
@@ -178,22 +174,18 @@ if __name__ == '__main__':
             torch.cuda.empty_cache()
     else:
         ii = 0
-        setting = '{}_{}_{}_ft{}_sl{}_ll{}_pl{}_dm{}_nh{}_el{}_dl{}_df{}_fc{}_eb{}_dt{}_ax{}_rl{}_axl{}_mf{}_{}_{}'.format(
+        setting = '{}_{}_{}_ft{}_sl{}_pl{}_hi{}_di{}_hl{}_dl{}_dm{}_ax{}_rl{}_axl{}_mf{}_{}_{}'.format(
             args.model_id,
             args.model,
             args.data,
             args.features,
             args.seq_len,
-            args.label_len,
             args.pred_len,
+            args.use_hour_index,
+            args.use_day_index,
+            args.hour_length,
+            args.day_length,
             args.d_model,
-            args.n_heads,
-            args.e_layers,
-            args.d_layers,
-            args.d_ff,
-            args.factor,
-            args.embed,
-            args.distil,
             args.auxi_lambda,
             args.rec_lambda,
             args.auxi_loss,

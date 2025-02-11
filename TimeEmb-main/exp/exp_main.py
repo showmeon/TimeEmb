@@ -77,6 +77,7 @@ class Exp_Main(Exp_Basic):
                 batch_y_mark = batch_y_mark.float().to(self.device)
 
                 hour_index = hour_index.int().to(self.device)
+                # without week-level bank
                 if torch.all(day_index != -1):
                     day_index = day_index.int().to(self.device)
 
